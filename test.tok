@@ -1,0 +1,99 @@
+#USE_STDERR
+#INCLUDE_EXTRAS
+#REDUCE_SIZE
+[rules]
+
+Whitespace = @DISCARD(Whitespace, @LONGEST(@HORIZONTAL_WHITESPACE))
+Newline = @DISCARD(Newline, @LONGEST(@NEWLINE))
+SingleLineComment = @DISCARD(SingleLineComment, "//" @LONGEST(@ANY_EXCEPT(@NEWLINE)) @NEWLINE)
+MultiLineComment = @DISCARD(MultiLineComment, "/*" @LONGEST(@ANY_EXCEPT("*/")) "*/")
+
+IncludeStd = "#include" @LONGEST(@HORIZONTAL_WHITESPACE) "<" @LONGEST(@WORD) ">"
+IncludeLocal = "#include" @LONGEST(@HORIZONTAL_WHITESPACE) @STRING
+
+LiteralString = @STRING
+LiteralExtChar = "'\" @ANY "'"
+LiteralChar = "'" @ANY "'"
+LiteralFloat = @LONGEST(@INT) "." @LONGEST(@INT) @OPTIONAL(@ANY_OF("fFdD")) @OPTIONAL(@ANY_OF("lL"))
+LiteralInteger = @LONGEST(@INT) @OPTIONAL(@ANY_OF("uUlL")) @OPTIONAL(@ANY_OF("lL"))
+LiteralHex = "0" @ANY_OF("xX") @LONGEST(@ANY_OF("0123456789abcdefABCDEF"))
+LiteralBinary = "0" @ANY_OF("bB") @LONGEST(@ANY_OF("01"))
+True = "true"
+False = "false"
+
+Int = "int"
+Float = "float"
+Double = "double"
+Void = "void"
+Char = "char"
+Long = "long"
+Short = "short"
+Unsigned = "unsigned"
+
+Break = "break"
+Case = "case"
+Continue = "continue"
+Class = "class"
+Else = "else"
+Enum = "enum"
+Do = "do"
+For = "for"
+Struct = "struct"
+Switch = "switch"
+Union = "union"
+While = "while"
+Using = "using"
+Namespace = "namespace"
+If = "if"
+Identifier = @LONGEST(@WORD)
+
+Add = "+"
+Sub = "-"
+Mul = "*"
+Div = "/"
+Mod = "%"
+
+Arrow = "->"
+
+AddAdd = "++"
+SubSub = "--"
+AddEqual = "+="
+SubEqual = "-="
+MulEqual = "*="
+DivEqual = "/="
+ModEqual = "%="
+XorEqual = "^="
+AndEqual = "&="
+OrEqual = "|="
+LessLessEqual = "<<="
+GreaterGreaterEqual = ">>="
+
+Bang = "!"
+BangEqual = "!="
+LessEqual = "<="
+GreaterEqual = ">="
+LessThan = "<"
+GreaterThan = ">"
+LessLess = "<<"
+GreaterGreater = ">>"
+EqualEqual = "=="
+Equal = "="
+ColonColon = "::"
+Colon = ":"
+SemiColon = ";"
+Comma = ","
+QuestionMark = "?"
+Dot = "."
+AndAnd = "&&"
+And = "&"
+OrOr = "||"
+Or = "|"
+Xor = "^"
+Tilde = "~"
+
+LeftParen = "("
+RightParen = ")"
+LeftBracket = "["
+RightBracket = "]"
+LeftCurl = "{"
+RightCurl = "}"
